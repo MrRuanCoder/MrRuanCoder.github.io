@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"><title>Software Construction第一讲重要内容(HIT) | kanojospear's Blog</title><meta name="author" content="Ruan"><meta name="copyright" content="Ruan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Views and Quality Objectives of Software ConstructionMulti-dimensional software views(软件构造的多维度视图) Build-time Views(1) Build-time, moment, and code-level viewAST半结构化：近乎自然语言的风格+遵循特定的编程语法前者：方便程序员后者：方便编译器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Software Construction第一讲重要内容(HIT)">
+<meta property="og:url" content="http://kanojospear.top/2023/03/26/Software-Construction%E7%AC%AC%E4%B8%80%E8%AE%B2%E5%86%85%E5%AE%B9HIT/index.html">
+<meta property="og:site_name" content="kanojospear&#39;s Blog">
+<meta property="og:description" content="Views and Quality Objectives of Software ConstructionMulti-dimensional software views(软件构造的多维度视图) Build-time Views(1) Build-time, moment, and code-level viewAST半结构化：近乎自然语言的风格+遵循特定的编程语法前者：方便程序员后者：方便编译器">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/MrRuanCoder/BlogImage@main/Ruan.jfif">
+<meta property="article:published_time" content="2023-03-26T07:24:44.000Z">
+<meta property="article:modified_time" content="2023-04-04T12:20:52.892Z">
+<meta property="article:author" content="Ruan">
+<meta property="article:tag" content="软件构造">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/MrRuanCoder/BlogImage@main/Ruan.jfif"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/MrRuanCoder/BlogImage@main/Ruan.jfif"><link rel="canonical" href="http://kanojospear.top/2023/03/26/Software-Construction%E7%AC%AC%E4%B8%80%E8%AE%B2%E5%86%85%E5%AE%B9HIT/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//www.google-analytics.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script async="async" src="https://www.googletagmanager.com/gtag/js?id=360968174"></script><script>window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '360968174');
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  }
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Software Construction第一讲重要内容(HIT)',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-04-04 20:20:52'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/MrRuanCoder/BlogImage@main/Ruan.jfif" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://sm.ms/image/73dAfQKXJDqoSa5')"><nav id="nav"><span id="blog-info"><a href="/" title="kanojospear's Blog"><span class="site-name">kanojospear's Blog</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Software Construction第一讲重要内容(HIT)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-26T07:24:44.000Z" title="发表于 2023-03-26 15:24:44">2023-03-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-04T12:20:52.892Z" title="更新于 2023-04-04 20:20:52">2023-04-04</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Software Construction第一讲重要内容(HIT)"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Views-and-Quality-Objectives-of-Software-Construction"><a href="#Views-and-Quality-Objectives-of-Software-Construction" class="headerlink" title="Views and Quality Objectives of Software Construction"></a>Views and Quality Objectives of Software Construction</h1><h2 id="Multi-dimensional-software-views-软件构造的多维度视图"><a href="#Multi-dimensional-software-views-软件构造的多维度视图" class="headerlink" title="Multi-dimensional software views(软件构造的多维度视图)"></a>Multi-dimensional software views(软件构造的多维度视图)</h2><p><img src="https://s2.loli.net/2023/03/26/E4vbKleuHtak9Vz.png" alt="image.png"></p>
+<h3 id="Build-time-Views"><a href="#Build-time-Views" class="headerlink" title="Build-time Views"></a>Build-time Views</h3><h4 id="1-Build-time-moment-and-code-level-view"><a href="#1-Build-time-moment-and-code-level-view" class="headerlink" title="(1) Build-time, moment, and code-level view"></a>(1) Build-time, moment, and code-level view</h4><h5 id="AST"><a href="#AST" class="headerlink" title="AST"></a>AST</h5><p>半结构化：近乎自然语言的风格+遵循特定的编程语法<br>前者：方便程序员<br>后者：方便编译器</p>
+<p>AST：彻底结构化，将源代码变为一棵树，对树做各种操作&#x3D;&#x3D;对源代码的修改<br><img src="https://s2.loli.net/2023/03/26/2O5cflTSbjNiLPI.png" alt="image.png"></p>
+<h4 id="2-Build-time-period-and-code-level-view"><a href="#2-Build-time-period-and-code-level-view" class="headerlink" title="(2) Build-time, period, and code-level view"></a>(2) Build-time, period, and code-level view</h4><h5 id="Code-churn-代码变化"><a href="#Code-churn-代码变化" class="headerlink" title="Code churn 代码变化:"></a>Code churn 代码变化:</h5><p><img src="https://s2.loli.net/2023/03/26/VN5RGMCcXrvSitg.png" alt="image.png"></p>
+<p><strong>Code churn</strong>  is defined as lines added, modified or deleted to a file from one version to another.</p>
+<p><img src="https://s2.loli.net/2023/03/26/HveKrdlGSJT3cYA.png" alt="image.png"></p>
+<h4 id="3-Build-time-moment-and-component-level-view"><a href="#3-Build-time-moment-and-component-level-view" class="headerlink" title="(3) Build-time, moment, and component-level view"></a>(3) Build-time, moment, and component-level view</h4><h5 id="Library"><a href="#Library" class="headerlink" title="Library"></a>Library</h5><p>开发者像使用编程语言指令一样使用库中的功能<br>System.out.println(“Hello World”); :blush:</p>
+<p>库的来源：<br>操作系统提供的库<br>编程语言提供的库<br>第三方公司提供的库<br>你自己积累的库</p>
+<p>编程时和build时，需告诉IDE和JVM在哪里寻找某些库</p>
+<p>Two different approaches of integrating a library into an executable program:<br>–Static linking (静态链接)<br>–Dynamic linking (动态链接)</p>
+<h5 id="Static-linking-静态链接"><a href="#Static-linking-静态链接" class="headerlink" title="Static linking(静态链接)"></a>Static linking(静态链接)</h5><p>In static linking, a library is a collection of individual object files.<br>库被拷贝进入代码形成整体，执行的时候无需提供库文件</p>
+<p>Static linking happens in <strong>build time</strong>(静态链接发生在构造阶段)<br>–End up with a single executable program to be loaded onto the target machine.<br>–After the final executable program has been created, it’s impossible to separate the program from its libraries.</p>
+<p><img src="https://s2.loli.net/2023/03/26/Bt9rMIsDeCSLN1k.png" alt="image.png"></p>
+<h4 id="4-Build-time-period-and-component-level-view"><a href="#4-Build-time-period-and-component-level-view" class="headerlink" title="(4)Build-time, period, and component-level view"></a>(4)Build-time, period, and component-level view</h4><h5 id="Version-Control-System-VCS"><a href="#Version-Control-System-VCS" class="headerlink" title="Version Control System (VCS)"></a>Version Control System (VCS)</h5><h5 id="Evolution-Graph-of-a-SCI-or-a-Software"><a href="#Evolution-Graph-of-a-SCI-or-a-Software" class="headerlink" title="Evolution Graph (of a SCI or a Software)"></a>Evolution Graph (of a SCI or a Software)</h5><p>Evaluation graph describes the development process and phases of a software.（评估图描述了软件开发过程和阶段的发展情况。）<br><img src="https://s2.loli.net/2023/03/26/uOlWqHi7BI9Vjhe.png" alt="image.png"></p>
+<h5 id="Versioning"><a href="#Versioning" class="headerlink" title="Versioning"></a>Versioning</h5><p><img src="https://s2.loli.net/2023/03/26/JEgisXeyG8Z6Ddj.png" alt="image.png"></p>
+<p>在软件开发中，通常采用“major.minor.patch”版本号格式来标识软件的版本。这个版本号格式包含三个数字，每个数字之间用一个点号（.）隔开，它们分别代表主版本号（major）、次版本号（minor）和修订号（patch）。每个数字的含义如下：</p>
+<p>主版本号（major）：这个数字代表软件的重大更新，通常是功能的重大改变或是架构的变化。当主版本号增加时，表明软件的核心部分已经发生了重大变化，可能导致不兼容性的问题。</p>
+<p>次版本号（minor）：这个数字代表软件的次要更新，通常是功能的增加或是改进，但是不会影响软件的整体架构。当次版本号增加时，表明软件的某些功能得到了增强，但整体结构没有变化。</p>
+<p>修订号（patch）：这个数字代表软件的修复和更新，通常是修复已知的漏洞或者bug。当修订号增加时，表明软件进行了一些小的修复和更新，但是没有增加新的功能或者改变整体结构。</p>
+<p>通常，软件的版本号是以递增的方式进行更新的。例如，从版本号1.0.0升级到1.0.1表示一个修复，从1.0.0升级到1.1.0表示一个较小的更新，从1.0.0升级到2.0.0表示一个重大的更新。</p>
+<h3 id="Runtime-Views"><a href="#Runtime-Views" class="headerlink" title="Runtime Views"></a>Runtime Views</h3><h5 id="Native-Machine-Code（原生机器码）"><a href="#Native-Machine-Code（原生机器码）" class="headerlink" title="Native Machine Code（原生机器码）"></a>Native Machine Code（原生机器码）</h5><p>原生机器码（Native Machine Code）是计算机可以直接执行的二进制指令，它是由CPU能够识别和执行的一系列指令。它是计算机硬件能够理解和执行的最低级别的指令集，每个指令包含一组二进制代码，用于执行特定的操作，例如数据移动、算术运算、逻辑运算、控制流程等。</p>
+<p>原生机器吗通常使用汇编语言来编写，因为汇编语言可以直接映射到机器码。</p>
+<p><img src="https://s2.loli.net/2023/03/26/dPJu2jmz6cTiKFl.png" alt="image.png"></p>
+<h5 id="Fully-Interpreted-Execution（程序完全解释执行）"><a href="#Fully-Interpreted-Execution（程序完全解释执行）" class="headerlink" title="Fully Interpreted Execution（程序完全解释执行）"></a>Fully Interpreted Execution（程序完全解释执行）</h5><p>程序完全解释执行（Fully Interpreted Execution）是一种编程语言的实现方式，它在运行程序时逐行解释代码，而不是将代码编译为机器语言或字节码。在程序完全解释执行的模式下，程序的每一行代码都会被解释器逐行解释并执行。<br>The runtime system loads the entire source code into memory and interprets it (such as BASIC, UNIX shell, etc)</p>
+<p><img src="https://s2.loli.net/2023/03/26/Fu7GshaUjIQEcpx.png" alt="image.png"></p>
+<h5 id="Interpreted-Byte-Codes-解释型字节码"><a href="#Interpreted-Byte-Codes-解释型字节码" class="headerlink" title="Interpreted Byte Codes (解释型字节码)"></a>Interpreted Byte Codes (解释型字节码)</h5><p>解释型字节码是一种中间代码形式，它是源代码编译成可执行代码的中间步骤。与直接将源代码编译成本地机器代码不同，解释型字节码需要一个解释器来执行代码。解释器会逐行读取字节码，并将其翻译成机器代码并执行。这种方式可以实现跨平台的应用程序，因为解释器可以在不同的操作系统和硬件上运行。</p>
+<p>Java Virtual Machine (JVM)<br><img src="https://s2.loli.net/2023/03/26/3juMkhwVcF5LrqA.png" alt="image.png"></p>
+<p>Perl or Python: they are interpreted rather than compiled, but use byte codes at runtime.<br><img src="https://s2.loli.net/2023/03/26/kS1PtlHRecmIEzh.png" alt="image.png"></p>
+<h5 id="Dynamic-linking-动态链接"><a href="#Dynamic-linking-动态链接" class="headerlink" title="Dynamic linking (动态链接)"></a>Dynamic linking (动态链接)</h5><p>-库文件不会在build阶段被加入可执行软件，仅仅做出标记。<br>-程序运行时，根据标记装载库至内存。<br>-发布软件时，记得将程序所依赖的所有动态库都复制给用户。</p>
+<p><img src="https://s2.loli.net/2023/03/26/CxUi4pmFHoG8B1O.png" alt="image.png"></p>
+<p>Advantages<br>–It’s possible to upgradeto a newer version of a library (adding features or fixing bugs), without needing to re-create the executable program.<br>–Many operating systems can optimize their memory usage by loading only a single copy of the library into memory, yet sharingit with other programs that require that same library.</p>
+<h5 id="动态链接与静态链接的区别"><a href="#动态链接与静态链接的区别" class="headerlink" title="动态链接与静态链接的区别"></a>动态链接与静态链接的区别</h5><p>动态链接和静态链接是在编译和链接代码时使用的两种不同的方法。</p>
+<p>静态链接是指在编译时将所有代码和库文件链接成一个单独的可执行文件，使得执行文件包含了所有的依赖关系和函数。这种方式在运行时不需要额外的依赖库，但是会导致可执行文件变得较大，同时在多个程序使用同一库时也会产生重复的代码，浪费系统资源。</p>
+<p>动态链接是指在运行时将程序所需的库文件动态链接到内存中，使得多个程序可以共享同一份库文件，避免了重复的代码和浪费系统资源的问题。这种方式会产生一个外部的库文件，程序需要在运行时检查库文件是否存在，如果不存在则会发生链接错误。</p>
+<p>总的来说，静态链接比较适合小型应用程序，而动态链接则更适合大型程序，特别是在多个程序共享同一库文件的情况下。</p>
+<h4 id="5-Run-time-moment-and-code-level-view"><a href="#5-Run-time-moment-and-code-level-view" class="headerlink" title="(5) Run-time, moment, and code-level view"></a>(5) Run-time, moment, and code-level view</h4><h5 id="代码快照图"><a href="#代码快照图" class="headerlink" title="代码快照图"></a>代码快照图</h5><p>描述程序运行时内存里变量层面的状态<br>Fine-grained(细粒度) states of a program.</p>
+<p><img src="https://s2.loli.net/2023/03/26/1ZOS8hYU7iedCNm.png" alt="image.png"></p>
+<h5 id="Memory-dump-内存信息转储"><a href="#Memory-dump-内存信息转储" class="headerlink" title="Memory dump (内存信息转储)"></a>Memory dump (内存信息转储)</h5><p>“Memory dump” 是指将计算机的内存中的所有数据和程序状态记录下来并存储到硬盘上的过程。</p>
+<p>举个例子来说，就好像你在玩一个电脑游戏时，游戏突然崩溃了，而你需要向开发商或技术支持团队报告这个问题。在这种情况下，你可以通过创建一个”memory dump”来捕获崩溃时的状态和数据，并将其保存到文件中。然后，开发商或技术支持团队可以分析这个文件，找出问题出在哪里，以便修复它。</p>
+<p>在计算机安全领域，”memory dump”也被用于分析恶意软件或攻击事件。当系统遭受攻击或感染病毒时，安全专家可以创建一个”memory dump”来获取有关攻击者或病毒的详细信息，以便进行进一步分析和调查。</p>
+<p>总的来说，”memory dump”是一种非常有用的工具，它可以帮助人们在计算机系统出现问题时更好地理解和解决问题，同时也可以帮助安全专家追踪和分析恶意软件和攻击事件。</p>
+<h4 id="6-Run-time-period-and-code-level-view"><a href="#6-Run-time-period-and-code-level-view" class="headerlink" title="(6) Run-time, period and code-level view"></a>(6) Run-time, period and code-level view</h4><h5 id="Sequence-diagram-in-UML-时序图"><a href="#Sequence-diagram-in-UML-时序图" class="headerlink" title="Sequence diagram in UML(时序图)"></a>Sequence diagram in UML(时序图)</h5><p><img src="https://s2.loli.net/2023/03/26/UPRmxtKXIrcV4CG.png" alt="image.png"></p>
+<h5 id="Execution-tracing-执行跟踪"><a href="#Execution-tracing-执行跟踪" class="headerlink" title="Execution tracing 执行跟踪"></a>Execution tracing 执行跟踪</h5><p>Tracing involves a specialized use of logging to record information about a program‘s execution. （用日志方式记录程序执行的调用次序）</p>
+<h4 id="7-Run-time-moment-and-component-level-view"><a href="#7-Run-time-moment-and-component-level-view" class="headerlink" title="(7) Run-time, moment, and component-level view"></a>(7) Run-time, moment, and component-level view</h4><h5 id="Deployment-diagram-in-UML（部署图）"><a href="#Deployment-diagram-in-UML（部署图）" class="headerlink" title="Deployment diagram in UML（部署图）"></a>Deployment diagram in UML（部署图）</h5><p><img src="https://s2.loli.net/2023/03/26/mkEra1jdAQJxo9O.png" alt="image.png"></p>
+<h4 id="8-Run-time-period-and-component-level-view"><a href="#8-Run-time-period-and-component-level-view" class="headerlink" title="(8) Run-time, period, and component-level view"></a>(8) Run-time, period, and component-level view</h4><p>Event logging provides system administrators with information useful for diagnostics and auditing. (事件日志：系统层面)</p>
+<h2 id="Software-construction-Transformation-between-views-软件构造的阶段划分、各阶段的构造活动"><a href="#Software-construction-Transformation-between-views-软件构造的阶段划分、各阶段的构造活动" class="headerlink" title="Software construction: Transformation between views(软件构造的阶段划分、各阶段的构造活动)"></a>Software construction: Transformation between views(软件构造的阶段划分、各阶段的构造活动)</h2><p><img src="https://s2.loli.net/2023/03/26/e5RGkY1jPHft2bS.png" alt="image.png"></p>
+<h2 id="Quality-properties-of-software-systems-软件的内部-x2F-外部的质量指标"><a href="#Quality-properties-of-software-systems-软件的内部-x2F-外部的质量指标" class="headerlink" title="Quality properties of software systems(软件的内部&#x2F;外部的质量指标)"></a>Quality properties of software systems(软件的内部&#x2F;外部的质量指标)</h2><p>External quality factors affect users外部质量因素影响用户<br>Internal quality factors affect the software itself and its developers内部质量因素影响软件本身和它的开发者<br>External quality results from internal quality外部质量取决于内部质量</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><h4 id="Three-dimensions-of-describing-a-software-system"><a href="#Three-dimensions-of-describing-a-software-system" class="headerlink" title="Three dimensions of describing a software system:"></a>Three dimensions of describing a software system:</h4><p>–By phases(阶段划分): build-and run-time views(构造时&#x2F;运行时视图)<br>–By dynamics(动态性划分): moment and period views(时刻&#x2F;阶段视图)<br>–By levels(构造对象的层次划分): code and component views(代码&#x2F;构件视图)</p>
+<h4 id="Quality-properties-of-software-systems"><a href="#Quality-properties-of-software-systems" class="headerlink" title="Quality properties of software systems"></a>Quality properties of software systems</h4><p>–External vs. internal quality factors<br>–Important external quality factors(外部质量指标、内部质量指标)<br>–Tradeoff between quality factors(质量指标之间的折中)</p>
+<h4 id="Five-key-quality-objectives-of-software-construction（软件构造的五个关键质量目标）"><a href="#Five-key-quality-objectives-of-software-construction（软件构造的五个关键质量目标）" class="headerlink" title="Five key quality objectives of software construction（软件构造的五个关键质量目标）"></a>Five key quality objectives of software construction（软件构造的五个关键质量目标）</h4><p>–Easy to understand: elegant and beautiful code &#x2F; understandability(易理解)<br>–Ready for change: maintainability and adaptability(可变化性)<br>–Cheap for develop: design for&#x2F;with reuse: reusability(开发成本)<br>–Safe from bugs: robustness(安全性)<br>–Efficient to run: performance(性能)</p>
+<p><em><strong>外部质量因素：</strong></em> correctness（正确性）,robustness（健壮性）,extendibility（可扩展性）,reusability（可复用性）,compatibility（兼容性）除此之外还有可以执行，可修复性，经济性等等</p>
+<p><em><strong>内部的质量因素：</strong></em> 代码行数、低耦合、可读性、可理解性、清洁度等</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="http://kanojospear.top">Ruan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://kanojospear.top/2023/03/26/Software-Construction%E7%AC%AC%E4%B8%80%E8%AE%B2%E5%86%85%E5%AE%B9HIT/">http://kanojospear.top/2023/03/26/Software-Construction%E7%AC%AC%E4%B8%80%E8%AE%B2%E5%86%85%E5%AE%B9HIT/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://kanojospear.top" target="_blank">kanojospear's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0/">软件构造</a></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/MrRuanCoder/BlogImage@main/Ruan.jfif" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/03/26/Java-warning/" title="Java warning"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Java warning</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/18/Java-%E6%B3%A8%E8%A7%A3/" title="Java@注解"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java@注解</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/MrRuanCoder/BlogImage@main/Ruan.jfif" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Ruan</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">1</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MrRuanCoder"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MrRuanCoder" target="_blank" title="Github"><i class="fab fa-github fa-bounce"></i></a><a class="social-icon" href="mailto:spearKanojo@outlook.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://discordapp.com/users/Spear" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a><a class="social-icon" href="https://https://mastodon.online/@Mr_meeseeks" target="_blank" title="Mastodon"><i class="fa-brands fa-mastodon"></i></a><a class="social-icon" href="https://telegram.org/" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Views-and-Quality-Objectives-of-Software-Construction"><span class="toc-number">1.</span> <span class="toc-text">Views and Quality Objectives of Software Construction</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-dimensional-software-views-%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0%E7%9A%84%E5%A4%9A%E7%BB%B4%E5%BA%A6%E8%A7%86%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text">Multi-dimensional software views(软件构造的多维度视图)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-time-Views"><span class="toc-number">1.1.1.</span> <span class="toc-text">Build-time Views</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Build-time-moment-and-code-level-view"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">(1) Build-time, moment, and code-level view</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#AST"><span class="toc-number">1.1.1.1.1.</span> <span class="toc-text">AST</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Build-time-period-and-code-level-view"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">(2) Build-time, period, and code-level view</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Code-churn-%E4%BB%A3%E7%A0%81%E5%8F%98%E5%8C%96"><span class="toc-number">1.1.1.2.1.</span> <span class="toc-text">Code churn 代码变化:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Build-time-moment-and-component-level-view"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">(3) Build-time, moment, and component-level view</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Library"><span class="toc-number">1.1.1.3.1.</span> <span class="toc-text">Library</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Static-linking-%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.1.3.2.</span> <span class="toc-text">Static linking(静态链接)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Build-time-period-and-component-level-view"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">(4)Build-time, period, and component-level view</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Version-Control-System-VCS"><span class="toc-number">1.1.1.4.1.</span> <span class="toc-text">Version Control System (VCS)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Evolution-Graph-of-a-SCI-or-a-Software"><span class="toc-number">1.1.1.4.2.</span> <span class="toc-text">Evolution Graph (of a SCI or a Software)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Versioning"><span class="toc-number">1.1.1.4.3.</span> <span class="toc-text">Versioning</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Runtime-Views"><span class="toc-number">1.1.2.</span> <span class="toc-text">Runtime Views</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Native-Machine-Code%EF%BC%88%E5%8E%9F%E7%94%9F%E6%9C%BA%E5%99%A8%E7%A0%81%EF%BC%89"><span class="toc-number">1.1.2.0.1.</span> <span class="toc-text">Native Machine Code（原生机器码）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Fully-Interpreted-Execution%EF%BC%88%E7%A8%8B%E5%BA%8F%E5%AE%8C%E5%85%A8%E8%A7%A3%E9%87%8A%E6%89%A7%E8%A1%8C%EF%BC%89"><span class="toc-number">1.1.2.0.2.</span> <span class="toc-text">Fully Interpreted Execution（程序完全解释执行）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Interpreted-Byte-Codes-%E8%A7%A3%E9%87%8A%E5%9E%8B%E5%AD%97%E8%8A%82%E7%A0%81"><span class="toc-number">1.1.2.0.3.</span> <span class="toc-text">Interpreted Byte Codes (解释型字节码)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Dynamic-linking-%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5"><span class="toc-number">1.1.2.0.4.</span> <span class="toc-text">Dynamic linking (动态链接)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E4%B8%8E%E9%9D%99%E6%80%81%E9%93%BE%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">1.1.2.0.5.</span> <span class="toc-text">动态链接与静态链接的区别</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Run-time-moment-and-code-level-view"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">(5) Run-time, moment, and code-level view</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%BF%AB%E7%85%A7%E5%9B%BE"><span class="toc-number">1.1.2.1.1.</span> <span class="toc-text">代码快照图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Memory-dump-%E5%86%85%E5%AD%98%E4%BF%A1%E6%81%AF%E8%BD%AC%E5%82%A8"><span class="toc-number">1.1.2.1.2.</span> <span class="toc-text">Memory dump (内存信息转储)</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-Run-time-period-and-code-level-view"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">(6) Run-time, period and code-level view</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Sequence-diagram-in-UML-%E6%97%B6%E5%BA%8F%E5%9B%BE"><span class="toc-number">1.1.2.2.1.</span> <span class="toc-text">Sequence diagram in UML(时序图)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Execution-tracing-%E6%89%A7%E8%A1%8C%E8%B7%9F%E8%B8%AA"><span class="toc-number">1.1.2.2.2.</span> <span class="toc-text">Execution tracing 执行跟踪</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-Run-time-moment-and-component-level-view"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">(7) Run-time, moment, and component-level view</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Deployment-diagram-in-UML%EF%BC%88%E9%83%A8%E7%BD%B2%E5%9B%BE%EF%BC%89"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">Deployment diagram in UML（部署图）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-Run-time-period-and-component-level-view"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">(8) Run-time, period, and component-level view</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Software-construction-Transformation-between-views-%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0%E7%9A%84%E9%98%B6%E6%AE%B5%E5%88%92%E5%88%86%E3%80%81%E5%90%84%E9%98%B6%E6%AE%B5%E7%9A%84%E6%9E%84%E9%80%A0%E6%B4%BB%E5%8A%A8"><span class="toc-number">1.2.</span> <span class="toc-text">Software construction: Transformation between views(软件构造的阶段划分、各阶段的构造活动)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Quality-properties-of-software-systems-%E8%BD%AF%E4%BB%B6%E7%9A%84%E5%86%85%E9%83%A8-x2F-%E5%A4%96%E9%83%A8%E7%9A%84%E8%B4%A8%E9%87%8F%E6%8C%87%E6%A0%87"><span class="toc-number">1.3.</span> <span class="toc-text">Quality properties of software systems(软件的内部&#x2F;外部的质量指标)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Summary"><span class="toc-number">1.4.</span> <span class="toc-text">Summary</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Three-dimensions-of-describing-a-software-system"><span class="toc-number">1.4.0.1.</span> <span class="toc-text">Three dimensions of describing a software system:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Quality-properties-of-software-systems"><span class="toc-number">1.4.0.2.</span> <span class="toc-text">Quality properties of software systems</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Five-key-quality-objectives-of-software-construction%EF%BC%88%E8%BD%AF%E4%BB%B6%E6%9E%84%E9%80%A0%E7%9A%84%E4%BA%94%E4%B8%AA%E5%85%B3%E9%94%AE%E8%B4%A8%E9%87%8F%E7%9B%AE%E6%A0%87%EF%BC%89"><span class="toc-number">1.4.0.3.</span> <span class="toc-text">Five key quality objectives of software construction（软件构造的五个关键质量目标）</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/04/04/Javascript%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F/" title="Javascript箭头函数表达式">Javascript箭头函数表达式</a><time datetime="2023-04-04T11:10:24.000Z" title="发表于 2023-04-04 19:10:24">2023-04-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/26/Java-warning/" title="Java warning">Java warning</a><time datetime="2023-03-26T14:49:28.000Z" title="发表于 2023-03-26 22:49:28">2023-03-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/26/Software-Construction%E7%AC%AC%E4%B8%80%E8%AE%B2%E5%86%85%E5%AE%B9HIT/" title="Software Construction第一讲重要内容(HIT)">Software Construction第一讲重要内容(HIT)</a><time datetime="2023-03-26T07:24:44.000Z" title="发表于 2023-03-26 15:24:44">2023-03-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/18/Java-%E6%B3%A8%E8%A7%A3/" title="Java@注解">Java@注解</a><time datetime="2023-03-17T17:44:48.000Z" title="发表于 2023-03-18 01:44:48">2023-03-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/03/13/Servlet-Tomcat/" title="Java Web:Servlet,Tomcat">Java Web:Servlet,Tomcat</a><time datetime="2023-03-13T14:22:14.000Z" title="发表于 2023-03-13 22:22:14">2023-03-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://sm.ms/image/73dAfQKXJDqoSa5')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Ruan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi! Welcome to Ruan's blog.</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="聊天"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>(() => {
+  const $mermaidWrap = document.querySelectorAll('#article-container .mermaid-wrap')
+  if ($mermaidWrap.length) {
+    window.runMermaid = () => {
+      window.loadMermaid = true
+      const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'default'
+
+      Array.from($mermaidWrap).forEach((item, index) => {
+        const mermaidSrc = item.firstElementChild
+        const mermaidThemeConfig = '%%{init:{ \'theme\':\'' + theme + '\'}}%%\n'
+        const mermaidID = 'mermaid-' + index
+        const mermaidDefinition = mermaidThemeConfig + mermaidSrc.textContent
+        mermaid.mermaidAPI.render(mermaidID, mermaidDefinition, (svgCode) => {
+          mermaidSrc.insertAdjacentHTML('afterend', svgCode)
+        })
+      })
+    }
+
+    const loadMermaid = () => {
+      window.loadMermaid ? runMermaid() : getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(runMermaid)
+    }
+
+    window.pjax ? loadMermaid() : document.addEventListener('DOMContentLoaded', loadMermaid)
+  }
+})()</script></div><div class="aplayer no-destroy" data-id="8268465430" data-server="netease" data-type="playlist" data-fixed="true" data-autoplay="true"> </div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="true" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-nest.min.js"></script><script>(function(d, w, c) {
+    w.ChatraID = 'KpaSQzvgj55Ci5A7J';
+    var s = d.createElement('script');
+    w[c] = w[c] || function() {
+        (w[c].q = w[c].q || []).push(arguments);
+    };
+    s.async = true;
+    s.src = 'https://call.chatra.io/chatra.js';
+    if (d.head) d.head.appendChild(s);
+})(document, window, 'Chatra');
+
+if (true) {
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      Chatra('openChat')
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      Chatra('hide')
+    }
+    function chatBtnShow () {
+      Chatra('show')
+    }
+  }
+}</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: true,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '360968174', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
